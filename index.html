@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2f0">
+  <meta name="description" content="A short essay about the internet, its benefits, and how to use it wisely.">
+  <title>The Internet — A short essay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #0c0a08;
+      --obsidian: #1a1919;
+      --paper: #fff;
+      --bone: #f4f2f0;
+      --ash: #6d6c6b;
+      --hairline: #e5e7eb;
+      --accent: #e4f222;
+      --page-width: 1120px;
+      --font-latin: "Inter", "Segoe UI", sans-serif;
+      --font-arabic: "Noto Sans Arabic", Tahoma, sans-serif;
+      --essay-font-size: 17px;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #f4f2f0;
+      --obsidian: #111;
+      --paper: #201f1e;
+      --bone: #171615;
+      --ash: #b0adaa;
+      --hairline: #393735;
+      --accent: #e4f222;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bone);
+      color: var(--ink);
+      font-family: var(--font-latin);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01" on;
+    }
+    html[lang="ar"] body { font-family: var(--font-arabic); }
+    html[lang="ar"] [lang="en"], html[lang="en"] [lang="ar"] { display: none !important; }
+    a { color: inherit; }
+    button { color: inherit; font: inherit; }
+    .wrap { width: min(var(--page-width), calc(100% - 64px)); margin-inline: auto; }
+
+    .site-header {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      border-bottom: 1px solid var(--hairline);
+      background: var(--paper);
+      backdrop-filter: blur(12px);
+    }
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 14px;
+      letter-spacing: -.035em;
+    }
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--ink);
+      color: var(--accent);
+      font-size: 16px;
+      letter-spacing: -.08em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-links a {
+      color: var(--ash);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color .25s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }
+    .nav-links a { white-space: nowrap; }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .lang-switch, .theme-switch {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      background: transparent;
+      padding: 0 13px;
+      cursor: pointer;
+      font-size: 12px;
+      text-decoration: none;
+      transition: background-color .25s ease, border-color .25s ease;
+    }
+    .lang-switch:hover, .theme-switch:hover { background: var(--bone); border-color: #aaa7a4; }
+    .theme-switch { min-width: 38px; font-size: 16px; }
+
+    .hero { padding: 93px 0 76px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(340px, 1.05fr);
+      align-items: center;
+      gap: clamp(40px, 7vw, 92px);
+    }
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--ash);
+      font-size: 10px;
+      letter-spacing: .18em;
+      line-height: 2.2;
+      text-transform: uppercase;
+    }
+    .eyebrow .index { color: var(--ink); }
+    h1 {
+      max-width: 610px;
+      margin: 0;
+      font-size: clamp(54px, 7.2vw, 82px);
+      font-weight: 400;
+      letter-spacing: -.075em;
+      line-height: .98;
+      font-feature-settings: "ss01" on;
+    }
+    html[lang="ar"] h1 {
+      max-width: 650px;
+      font-size: clamp(48px, 6vw, 72px);
+      letter-spacing: -.06em;
+      line-height: 1.25;
+    }
+    .hero-copy {
+      max-width: 440px;
+      margin: 25px 0 0;
+      color: var(--ash);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .developer-credit { margin: 16px 0 0; color: var(--ash); font-size: 12px; }
+    .developer-credit span[dir="ltr"] { color: var(--ink); }
+    html[lang="ar"] .hero-copy { font-size: 18px; line-height: 1.9; }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 34px;
+    }
+    .primary-link, .reader-tool {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      background: var(--paper);
+      padding: 0 13px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      text-decoration: none;
+      transition: background-color .25s ease, border-color .25s ease;
+    }
+    .reader-tool:hover { background: var(--bone); border-color: #aaa7a4; }
+    .reader-tool:disabled { cursor: not-allowed; opacity: .5; }
+    .reader-tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+    .essay-font { font-size: var(--essay-font-size); }
+    .copy-status { min-height: 20px; margin: 0 0 10px; color: var(--ash); font-size: 12px; }
+    .reader-tool svg { width: 15px; height: 15px; }
+    .primary-link {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      padding-inline: 17px;
+      font-size: 13px;
+    }
+    .primary-link:hover { border-color: #d1de20; background: #d1de20; }
+    .primary-link svg { width: 15px; height: 15px; }
+
+    .visual {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid #e8e4e0;
+      border-radius: 16px;
+      background-color: #eeece9;
+      background-image: radial-gradient(#d5d1cc .75px, transparent .75px);
+      background-position: 6px 6px;
+      background-size: 17px 17px;
+      padding: 35px;
+    }
+    .visual::before {
+      position: absolute;
+      width: 245px;
+      height: 245px;
+      border: 1px solid rgba(12,10,8,.08);
+      border-radius: 50%;
+      content: "";
+    }
+    .visual::after {
+      position: absolute;
+      width: 188px;
+      height: 188px;
+      border: 1px solid rgba(12,10,8,.08);
+      border-radius: 50%;
+      content: "";
+    }
+    .network-illustration { position: relative; z-index: 1; width: min(100%, 390px); height: auto; }
+
+    .essay { padding: 106px 0 112px; }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 38px;
+    }
+    .section-heading .eyebrow { margin-bottom: 11px; }
+    h2 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: 1.03;
+    }
+    html[lang="ar"] h2 { letter-spacing: -.04em; line-height: 1.45; }
+    .section-intro { max-width: 310px; margin: 0 0 4px; color: var(--ash); font-size: 14px; }
+    html[lang="ar"] .section-intro { line-height: 1.9; }
+    .essay-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr);
+      align-items: start;
+      gap: 24px;
+    }
+    .essay-main {
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      background: var(--paper);
+      padding: clamp(25px, 4vw, 42px);
+    }
+    .essay-main p { max-width: 660px; margin: 0; font-size: var(--essay-font-size); line-height: 1.85; }
+    html[lang="ar"] .essay-main p { line-height: 2.05; }
+    .essay-main p + p { margin-top: 23px; }
+    .essay-aside { display: grid; gap: 14px; }
+    .point-card {
+      min-height: 139px;
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      background: var(--paper);
+      padding: 21px;
+    }
+    .point-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .point-number { color: var(--ash); font-size: 10px; letter-spacing: .14em; }
+    .point-icon {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--bone);
+      font-size: 14px;
+    }
+    .point-card h3 { margin: 0 0 5px; font-size: 17px; font-weight: 400; letter-spacing: -.035em; }
+    .point-card h3, .point-card p { min-width: 0; overflow-wrap: anywhere; }
+    .point-card p { margin: 0; color: var(--ash); font-size: 12px; line-height: 1.6; }
+    html[lang="ar"] .point-card p { line-height: 1.85; }
+
+    .wisdom { padding: 0 0 102px; }
+    .wisdom-panel {
+      position: relative;
+      min-height: 252px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: var(--obsidian);
+      color: var(--paper);
+      padding: 46px clamp(28px, 7vw, 76px);
+    }
+    .wisdom-panel .eyebrow { margin-bottom: 13px; color: #aaa7a4; }
+    .wisdom-panel h2 { max-width: 650px; font-size: clamp(32px, 4.5vw, 50px); letter-spacing: -.055em; }
+    html[lang="ar"] .wisdom-panel h2 { letter-spacing: -.035em; line-height: 1.55; }
+    .wisdom-panel p { max-width: 560px; margin: 13px 0 0; color: #c1bfbc; font-size: 14px; }
+    html[lang="ar"] .wisdom-panel p { line-height: 1.9; }
+    .wisdom-symbol {
+      width: 116px;
+      height: 116px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      color: var(--accent);
+      font-size: 41px;
+      transform: rotate(-12deg);
+    }
+
+    .closing {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 30px;
+      border-top: 1px solid #dcd9d5;
+      padding: 27px 0 40px;
+    }
+    .closing p { margin: 0; color: var(--ash); font-size: 12px; }
+    .closing .credit { color: var(--ink); font-size: 13px; }
+    .credit span { color: var(--ash); }
+    .back-top { color: var(--ink); font-size: 11px; text-decoration: none; }
+    .back-top:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    html[data-theme="dark"] .visual {
+      border-color: var(--hairline);
+      background-color: #252422;
+      background-image: radial-gradient(#44413e .75px, transparent .75px);
+    }
+    html[data-theme="dark"] .point-icon { background: #393735; }
+    html[data-theme="dark"] .closing { border-color: var(--hairline); }
+
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+    @media (max-width: 760px) {
+      .wrap { width: min(var(--page-width), calc(100% - 36px)); }
+      .nav { min-height: 62px; gap: 12px; }
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: 11px; }
+      .nav-actions { gap: 6px; }
+      .lang-switch, .theme-switch { min-height: 36px; padding-inline: 10px; }
+      .hero { padding: 62px 0 52px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      h1 { max-width: 550px; font-size: clamp(52px, 13vw, 76px); }
+      html[lang="ar"] h1 { font-size: clamp(46px, 11vw, 66px); }
+      .visual { min-height: 345px; padding: 24px; }
+      .essay { padding: 74px 0; }
+      .section-heading { display: block; }
+      .section-intro { margin-top: 16px; }
+      .essay-grid { grid-template-columns: 1fr; gap: 14px; }
+      .essay-aside { grid-template-columns: 1fr 1fr; }
+      .point-card { min-height: 150px; padding: 17px; }
+      .wisdom { padding-bottom: 70px; }
+      .wisdom-panel { min-height: 220px; padding: 34px 26px; }
+      .wisdom-symbol { width: 74px; height: 74px; font-size: 29px; }
+    }
+    @media (max-width: 460px) {
+      .brand { gap: 7px; font-size: 12px; }
+      .brand-mark { width: 29px; height: 29px; }
+      .nav-links { display: none; }
+      .nav-actions { gap: 6px; }
+      .lang-switch { min-height: 34px; padding-inline: 9px; }
+      .theme-switch { min-height: 34px; min-width: 34px; padding-inline: 8px; }
+      .hero-meta { gap: 13px; }
+      .visual { min-height: 315px; padding: 16px; }
+      .essay-main { padding: 23px; }
+      .essay-main p { font-size: 15px; }
+      .essay-aside { grid-template-columns: 1fr; }
+      .point-card { min-height: 0; }
+      .point-top { margin-bottom: 13px; }
+      .wisdom-panel { grid-template-columns: 1fr; gap: 24px; }
+      .wisdom-symbol { position: absolute; opacity: .16; inset-inline-end: 42px; }
+      .closing { grid-template-columns: 1fr; align-items: start; gap: 12px; }
+    }
+    @media print {
+      body, html[data-theme="dark"] body { background: #fff; color: #000; }
+      .site-header, .hero, .wisdom, .closing, .reader-tools, .copy-status, .essay-aside, .section-heading .section-intro { display: none !important; }
+      .essay { width: 100%; padding: 0; }
+      .section-heading { margin-bottom: 20px; }
+      .essay-grid { display: block; }
+      .essay-main { border: 0; padding: 0; }
+      .essay-font { color: #000; }
+      .essay-font p { break-inside: avoid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" id="brand-home" href="#top" aria-label="The Internet home">
+        <span class="brand-mark" aria-hidden="true">i.</span>
+        <span lang="en">The Internet</span><span lang="ar">الإنترنت</span>
+      </a>
+      <div class="nav-links">
+        <a href="#essay"><span lang="en">The essay</span><span lang="ar">التعبير</span></a>
+        <a href="#benefits"><span lang="en">Benefits</span><span lang="ar">الفوائد</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-switch" id="language-toggle" type="button" aria-label="Switch to Arabic" aria-pressed="false">
+          <span lang="en">العربية</span><span lang="ar">English</span>
+        </button>
+        <button class="theme-switch" id="theme-toggle" type="button" aria-label="Enable dark mode" aria-pressed="false">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow"><span lang="en">A short essay</span><span lang="ar">تعبير قصير</span></p>
+          <h1 id="hero-title"><span lang="en">The Internet:<br>A world within reach.</span><span lang="ar">الإنترنت:<br>عالمٌ في متناولنا.</span></h1>
+          <p class="hero-copy"><span lang="en">Its benefits, drawbacks, and how to use it wisely.</span><span lang="ar">فوائده وسلبياته وكيفية استخدامه بحكمة.</span></p>
+          <p class="developer-credit"><span lang="en">Designed and developed by </span><span lang="ar">تصميم وبرمجة </span><span dir="ltr">Zerouki Ahmed Mouad</span><span lang="ar"> — زروقي أحمد معاذ</span></p>
+          <div class="hero-meta">
+            <a class="primary-link" href="#essay">
+              <span lang="en">Read the essay</span><span lang="ar">اقرأ التعبير</span>
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="visual" id="hero-visual" aria-label="Abstract internet dashboard illustration">
+          <svg class="network-illustration" viewBox="0 0 400 320" fill="none" aria-hidden="true">
+            <circle cx="200" cy="160" r="105" stroke="currentColor" stroke-opacity=".12"/>
+            <circle cx="200" cy="160" r="76" stroke="currentColor" stroke-opacity=".12"/>
+            <circle cx="200" cy="160" r="46" stroke="currentColor" stroke-opacity=".12"/>
+            <path d="M55 160h290M200 15v290M97 57l206 206M303 57 97 263" stroke="currentColor" stroke-opacity=".17"/>
+            <path d="M200 84c-17 20-27 46-27 76s10 56 27 76m0-152c17 20 27 46 27 76s-10 56-27 76" stroke="currentColor" stroke-opacity=".28"/>
+            <path d="M126 124c22 12 47 18 74 18s52-6 74-18M126 196c22-12 47-18 74-18s52 6 74 18" stroke="currentColor" stroke-opacity=".28"/>
+            <circle cx="200" cy="160" r="12" fill="var(--accent)"/>
+            <circle cx="55" cy="160" r="5" fill="currentColor"/>
+            <circle cx="345" cy="160" r="5" fill="currentColor"/>
+            <circle cx="97" cy="57" r="5" fill="currentColor"/>
+            <circle cx="303" cy="263" r="5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="essay wrap" id="essay" aria-labelledby="essay-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow"><span lang="en">The essay</span><span lang="ar">التعبير</span></p>
+          <h2 id="essay-title"><span lang="en">The Internet</span><span lang="ar">الإنترنت</span></h2>
+        </div>
+        <p class="section-intro"><span lang="en">Read in English or Arabic. Use the tools to adjust, copy, or print the essay.</span><span lang="ar">اقرأ بالعربية أو الإنجليزية، واستخدم الأدوات لتكبير النص أو نسخه أو طباعته.</span></p>
+      </div>
+      <div class="essay-grid">
+        <article class="essay-main">
+          <div class="reader-tools" role="group" aria-label="Reading tools">
+            <button class="reader-tool" id="decrease-text" type="button" aria-label="Decrease text size">A−</button>
+            <button class="reader-tool" id="increase-text" type="button" aria-label="Increase text size">A+</button>
+            <button class="reader-tool" id="copy-essay" type="button">
+              <span lang="en">Copy essay</span><span lang="ar">نسخ التعبير</span>
+            </button>
+            <button class="reader-tool" id="print-essay" type="button">
+              <span lang="en">Print</span><span lang="ar">طباعة</span>
+            </button>
+          </div>
+          <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+          <div class="essay-font" id="essay-copy">
+          <p lang="en">The Internet is one of the most important inventions today. It plays a major role in our daily lives and has made the world a small village.</p>
+          <p lang="ar">يُعدّ الإنترنت من أهم الاختراعات في عصرنا. فهو يؤدي دوراً كبيراً في حياتنا اليومية، وجعل العالم قرية صغيرة.</p>
+          <p lang="en">First, the internet helps students search for information, learn new skills, and do school research easily. Second, it allows us to communicate with family and friends around the world instantly through social media and messaging apps.</p>
+          <p lang="ar">أولاً، يساعد الإنترنت الطلاب على البحث عن المعلومات وتعلّم مهارات جديدة وإنجاز أبحاثهم المدرسية بسهولة. وثانياً، يتيح لنا التواصل الفوري مع العائلة والأصدقاء حول العالم عبر وسائل التواصل الاجتماعي وتطبيقات المراسلة.</p>
+          <p lang="en">However, the internet has some drawbacks. Spending too much time online can waste time and lead to internet addiction. Furthermore, some online content is not safe or accurate.</p>
+          <p lang="ar">ومع ذلك، للإنترنت بعض السلبيات. فقضاء وقت طويل على الإنترنت قد يضيّع الوقت ويؤدي إلى الإدمان. كما أن بعض المحتوى المتاح عبر الإنترنت قد يكون غير آمن أو غير دقيق.</p>
+          <p lang="en">In conclusion, the internet is a very useful tool. If we use it wisely and responsibly, it can make our lives better and easier.</p>
+          <p lang="ar">وفي الختام، يُعدّ الإنترنت أداة مفيدة جداً. وإذا استخدمناه بحكمة ومسؤولية، فإنه يجعل حياتنا أفضل وأسهل.</p>
+          </div>
+        </article>
+        <aside class="essay-aside" id="benefits" aria-label="Key points">
+          <article class="point-card">
+            <div class="point-top"><span class="point-number"><span lang="en">01 / LEARN</span><span lang="ar">01 / تعلّم</span></span><span class="point-icon" aria-hidden="true">⌕</span></div>
+            <h3><span lang="en">Knowledge without borders</span><span lang="ar">معرفة بلا حدود</span></h3>
+            <p><span lang="en">Find information, build skills, and make school research easier.</span><span lang="ar">ابحث عن المعلومات، واكتسب المهارات، وأنجز أبحاثك المدرسية بسهولة.</span></p>
+          </article>
+          <article class="point-card">
+            <div class="point-top"><span class="point-number"><span lang="en">02 / CONNECT</span><span lang="ar">02 / تواصل</span></span><span class="point-icon" aria-hidden="true">↗</span></div>
+            <h3><span lang="en">Closer, wherever we are</span><span lang="ar">تواصلٌ مهما ابتعدنا</span></h3>
+            <p><span lang="en">Share a moment with family and friends, anywhere in the world.</span><span lang="ar">تواصل مع العائلة والأصدقاء وشاركهم لحظاتك من أي مكان.</span></p>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wisdom wrap" id="balance" aria-labelledby="wisdom-title">
+      <div class="wisdom-panel">
+        <div>
+          <p class="eyebrow"><span class="index">03</span> &nbsp; / &nbsp; <span lang="en">A thoughtful balance</span><span lang="ar">توازنٌ واعٍ</span></p>
+          <h2 id="wisdom-title"><span lang="en">Stay curious. Stay safe. Stay in control.</span><span lang="ar">كُن فضولياً، وابقَ آمناً، وتحكّم بوقتك.</span></h2>
+          <p><span lang="en">The internet works best when we choose reliable information, protect ourselves online, and make room for life beyond the screen.</span><span lang="ar">يكون الإنترنت أكثر فائدة عندما نختار المعلومات الموثوقة، ونحمي أنفسنا، ونخصّص وقتاً للحياة بعيداً عن الشاشات.</span></p>
+        </div>
+        <div class="wisdom-symbol" aria-hidden="true">↗</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap closing">
+    <div>
+      <p class="credit"><span lang="en">Created by </span><span lang="ar">برمجة </span><span dir="ltr">Zerouki Ahmed Mouad</span> <span lang="ar">— زروقي أحمد معاذ</span></p>
+    </div>
+    <a class="back-top" href="#top"><span lang="en">BACK TO TOP ↑</span><span lang="ar">العودة إلى الأعلى ↑</span></a>
+  </footer>
+
+  <script>
+    (() => {
+      const toggle = document.getElementById("language-toggle");
+      const themeToggle = document.getElementById("theme-toggle");
+      const page = document.documentElement;
+      const copyStatus = document.getElementById("copy-status");
+      const essay = document.getElementById("essay-copy");
+      const labels = {
+        en: {
+          home: "The Internet home",
+          navigation: "Main navigation",
+          visual: "Abstract internet dashboard illustration",
+          points: "Key points",
+          tools: "Reading tools",
+          decrease: "Decrease text size",
+          increase: "Increase text size",
+          enableDark: "Enable dark mode",
+          enableLight: "Switch to light mode",
+          copied: "Essay copied.",
+          copyFailed: "Copy failed. Select the essay text and copy it manually.",
+          description: "A short essay about the internet, its benefits, and how to use it wisely."
+        },
+        ar: {
+          home: "الصفحة الرئيسية: الإنترنت",
+          navigation: "التنقل الرئيسي",
+          visual: "رسم توضيحي لواجهة عن الإنترنت",
+          points: "أهم النقاط",
+          tools: "أدوات القراءة",
+          decrease: "تصغير حجم النص",
+          increase: "تكبير حجم النص",
+          enableDark: "تفعيل الوضع الداكن",
+          enableLight: "العودة إلى الوضع الفاتح",
+          copied: "تم نسخ التعبير.",
+          copyFailed: "تعذر النسخ. حدّد نص التعبير وانسخه يدوياً.",
+          description: "تعبير قصير عن الإنترنت وفوائده وكيفية استخدامه بحكمة."
+        }
+      };
+
+      function updateLanguage(language) {
+        const text = labels[language];
+        page.lang = language;
+        page.dir = language === "ar" ? "rtl" : "ltr";
+        copyStatus.textContent = "";
+        toggle.setAttribute("aria-pressed", String(language === "ar"));
+        toggle.setAttribute("aria-label", language === "ar" ? "Switch to English" : "Switch to Arabic");
+        themeToggle.setAttribute("aria-label", page.dataset.theme === "dark" ? text.enableLight : text.enableDark);
+        document.querySelector(".nav").setAttribute("aria-label", text.navigation);
+        document.getElementById("brand-home").setAttribute("aria-label", text.home);
+        document.getElementById("hero-visual").setAttribute("aria-label", text.visual);
+        document.querySelector(".essay-aside").setAttribute("aria-label", text.points);
+        document.querySelector(".reader-tools").setAttribute("aria-label", text.tools);
+        document.getElementById("decrease-text").setAttribute("aria-label", text.decrease);
+        document.getElementById("increase-text").setAttribute("aria-label", text.increase);
+        document.querySelector('meta[name="description"]').setAttribute("content", text.description);
+        document.title = language === "ar" ? "الإنترنت — تعبير قصير" : "The Internet — A short essay";
+      }
+
+      toggle.addEventListener("click", () => {
+        updateLanguage(page.lang === "en" ? "ar" : "en");
+      });
+
+      themeToggle.addEventListener("click", () => {
+        const darkMode = page.dataset.theme !== "dark";
+        page.dataset.theme = darkMode ? "dark" : "light";
+        themeToggle.setAttribute("aria-pressed", String(darkMode));
+        themeToggle.setAttribute("aria-label", darkMode ? labels[page.lang].enableLight : labels[page.lang].enableDark);
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", darkMode ? "#171615" : "#f4f2f0");
+      });
+
+      function changeTextSize(amount) {
+        const rootStyles = getComputedStyle(page);
+        const currentSize = parseFloat(rootStyles.getPropertyValue("--essay-font-size"));
+        const nextSize = Math.max(14, Math.min(24, currentSize + amount));
+        page.style.setProperty("--essay-font-size", `${nextSize}px`);
+        document.getElementById("decrease-text").disabled = nextSize === 14;
+        document.getElementById("increase-text").disabled = nextSize === 24;
+      }
+
+      document.getElementById("decrease-text").addEventListener("click", () => changeTextSize(-1));
+      document.getElementById("increase-text").addEventListener("click", () => changeTextSize(1));
+      document.getElementById("print-essay").addEventListener("click", () => window.print());
+      document.getElementById("copy-essay").addEventListener("click", async () => {
+        const text = Array.from(essay.querySelectorAll(`p[lang="${page.lang}"]`))
+          .map((paragraph) => paragraph.textContent.trim())
+          .join("\n\n");
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const temporaryInput = document.createElement("textarea");
+            temporaryInput.value = text;
+            temporaryInput.setAttribute("readonly", "");
+            temporaryInput.style.position = "fixed";
+            temporaryInput.style.opacity = "0";
+            document.body.append(temporaryInput);
+            temporaryInput.select();
+            const copied = document.execCommand("copy");
+            temporaryInput.remove();
+            if (!copied) throw new Error("Clipboard copy command was rejected.");
+          }
+          copyStatus.textContent = labels[page.lang].copied;
+        } catch {
+          copyStatus.textContent = labels[page.lang].copyFailed;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
